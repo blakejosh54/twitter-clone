@@ -1,0 +1,868 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --hover-pill: rgba(239, 243, 244, 0.08);
+  --dark-hover: rgba(110, 110, 110, 0.08);
+}
+
+html {
+  color-scheme: dark;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: #000;
+  color: #e7e9ea;
+  overflow: hidden;
+}
+
+a,
+button,
+.nav-item,
+.X,
+.post,
+.tweet-icons span,
+.post-tool,
+.post-actions .action,
+.news-item,
+.trend,
+.follow,
+.news-close,
+.card-button,
+.post-button,
+.follow-button,
+.account {
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    filter 300ms ease,
+    opacity 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.X:hover,
+.nav-item:hover,
+.account:hover {
+  background: var(--hover-pill);
+}
+
+.post:hover,
+.news-item:hover,
+.trend:hover,
+.follow:hover,
+.news-close:hover {
+  background: var(--dark-hover);
+}
+
+.post-tool svg,
+.post-actions .action svg,
+.nav-icon svg,
+.tweet-icons svg {
+  transition: fill 300ms ease;
+}
+
+.app {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 0 12px;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 350px;
+  column-gap: 28px;
+  align-items: start;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.left {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+.left-inner {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 260px;
+  padding-left: 12px;
+  padding-right: 12px;
+  left: max(2px, calc((100vw - 1280px) / 2 + 2px));
+}
+
+.center {
+  border-left: 1px solid #2f3336;
+  border-right: 1px solid #2f3336;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.center::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.right {
+  padding: 0 6px;
+  align-self: start;
+  height: 100vh;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin-right: calc(-1 * max(0px, (100vw - 1280px) / 2));
+  padding-right: calc(6px + max(0px, (100vw - 1280px) / 2));
+  pointer-events: auto;
+}
+
+.right-inner {
+  position: sticky;
+  top: 0;
+  height: fit-content;
+  overflow: visible;
+  overscroll-behavior: auto;
+}
+
+.X {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 10px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.X-icon {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.nav {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 28px 12px 14px;
+  border-radius: 999px;
+  font-size: 20px;
+  width: fit-content;
+}
+
+.nav-icon {
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.nav-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.nav-text {
+  font-weight: 400;
+  font-size: 21px;
+  position: relative;
+  top: -2px;
+}
+
+.nav-item.active .nav-text {
+  font-weight: 700;
+}
+
+.post-button {
+  margin-top: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: white;
+  color: black;
+  width: 220px;
+}
+
+.post-button:hover,
+.follow-button:hover {
+  filter: brightness(0.8);
+}
+
+.account {
+  margin-top: auto;
+  margin-bottom: 5px;
+  display: grid;
+  width: 250px;
+  grid-template-columns: 44px 1fr 28px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.account-meta {
+  line-height: 1.1;
+}
+
+.account-name {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.account-handle {
+  color: #71767b;
+  font-size: 14px;
+}
+
+.account-more {
+  color: #71767b;
+  text-align: right;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #2f3336;
+  padding: 0;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  text-align: center;
+}
+
+.top-tab {
+  position: relative;
+  padding: 14px 0 18px;
+  color: #71767b;
+}
+
+.top-tab.active {
+  color: #e7e9ea;
+  font-weight: 700;
+}
+
+.top-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.top-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  background: #1d9bf0;
+}
+
+.tweet-block {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.tweet-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  color: #e7e9ea;
+  font-size: 20px;
+  font-family: inherit;
+  padding: 10px 0 14px;
+  border-bottom: 1px solid #2f3336;
+  width: 100%;
+}
+
+.tweet-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.tweet-icons {
+  display: flex;
+  gap: 14px;
+  color: #1d9bf0;
+}
+
+.tweet-icons span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 15px;
+  border-radius: 999px;
+}
+
+.tweet-icons svg {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.tweet-post {
+  background: white;
+  color: black;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 999px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.divider {
+  height: 10px;
+  background: #0f1419;
+  border-top: 1px solid #2f3336;
+  border-bottom: 1px solid #2f3336;
+}
+
+.divider.thin {
+  height: 1px;
+  background: #2f3336;
+  border: 0;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.post-main {
+  min-width: 0;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.post-tool {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #71767b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.post-tool svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.post-tool:hover {
+  background: #0f1419;
+  color: #e7e9ea;
+}
+
+.post-tool-more {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.post-author .name {
+  font-weight: 700;
+}
+
+.post-author .badge {
+  font-size: 12px;
+  color: #000;
+  background: #e7e9ea;
+  border-radius: 999px;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.post-author .handle,
+.post-author .time {
+  color: #71767b;
+}
+
+.post-author .dot {
+  color: #71767b;
+}
+
+.post-more {
+  color: #71767b;
+}
+
+.post-text {
+  font-size: 15px;
+  color: #e7e9ea;
+  white-space: pre-wrap;
+}
+
+.media {
+  margin-top: 10px;
+  border: 1px solid #2f3336;
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  gap: 2px;
+  background: #2f3336;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #111;
+}
+
+.media-1 {
+  grid-template-columns: 1fr;
+}
+
+.media-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.media-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.post-meta {
+  margin-top: 8px;
+  color: #71767b;
+  font-size: 13px;
+}
+
+.post-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  color: #71767b;
+  font-size: 14px;
+  padding-right: 22px;
+  max-width: 520px;
+}
+
+.post-actions .action {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.post-actions .action svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.actions-left,
+.actions-right {
+  display: flex;
+  align-items: center;
+}
+
+.actions-left {
+  gap: 34px;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.post-actions .action:hover,
+.post-tool.post-tool-grok:hover,
+.post-tool.post-tool-more:hover,
+.tweet-icons span:hover {
+  color: #1d9bf0;
+  background: rgba(29, 155, 240, 0.12);
+}
+
+.post-actions .action.action-rt:hover {
+  color: #00ba7c;
+  background: rgba(0, 186, 124, 0.12);
+}
+
+.post-actions .action.action-like:hover {
+  color: #f91880;
+  background: rgba(249, 24, 128, 0.12);
+}
+
+.poll {
+  margin-top: 10px;
+  border: 1px solid #2f3336;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.poll-option {
+  position: relative;
+  padding: 10px 12px;
+  border-bottom: 1px solid #2f3336;
+}
+
+.poll-option:last-child {
+  border-bottom: 0;
+}
+
+.poll-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(29, 155, 240, 0.25);
+}
+
+.poll-row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.pct {
+  color: #e7e9ea;
+  font-weight: 700;
+}
+
+.poll-foot {
+  padding: 10px 12px;
+  color: #71767b;
+  font-size: 13px;
+  border-top: 1px solid #2f3336;
+  background: #0b0f13;
+}
+
+.search-wrapper {
+  position: sticky;
+  top: 0;
+  background: #000;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  z-index: 10;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #2f3336;
+  padding: 12px 14px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  color: #71767b;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.search-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.search-input {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: #e7e9ea;
+  width: 100%;
+  font-size: 15px;
+  padding-left: 26px;
+}
+
+.card {
+  background: black;
+  border: 1px solid #2f3336;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.card-text {
+  color: #e7e9ea;
+  font-size: 16px;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.card-button {
+  display: inline-flex;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #1d9bf0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.news {
+  padding: 0;
+  overflow: hidden;
+}
+
+.news-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 14px 8px;
+}
+
+.news-title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.news-close {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #71767b;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.news-close:hover {
+  background: #0f1419;
+}
+
+.news-item {
+  display: block;
+  padding: 16px 18px;
+}
+
+.news-headline {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.25;
+  color: #e7e9ea;
+}
+
+.news-details {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.news-details-text {
+  color: #71767b;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.news-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.news-avatars img {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid #16181c;
+  margin-left: -6px;
+  background: #111;
+}
+
+.news-avatars img:first-child {
+  margin-left: 0;
+}
+
+.trend {
+  display: block;
+  padding: 14px 12px;
+  border-radius: 12px;
+}
+
+.trend-top {
+  color: #71767b;
+  font-size: 13px;
+}
+
+.trend-middle {
+  font-weight: 700;
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.trend-bottom {
+  color: #71767b;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.show-more {
+  display: inline-block;
+  color: #1d9bf0;
+  padding: 10px 8px 2px;
+}
+
+.follow {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 12px;
+}
+
+.follow-name {
+  font-weight: 800;
+}
+
+.follow-handle {
+  color: #71767b;
+  font-size: 14px;
+}
+
+.follow-button {
+  background: #e7e9ea;
+  color: #000;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.footer {
+  margin-top: 6px;
+  color: #71767b;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 6px 8px;
+}
+
+.footer-copy {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #111;
+  flex-shrink: 0;
+  cursor: pointer;
+}
