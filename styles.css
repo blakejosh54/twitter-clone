@@ -1314,3 +1314,119 @@ body.light-theme .bookmark-modal-item:hover {
   background: #f3f4f6;
 }
 
+/* ----- AI Summarize feature ----- */
+
+.post {
+  position: relative;
+}
+
+.action-summarize {
+  display: none;
+  color: #71767b;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.action-summarize svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.post.long-tweet .action-summarize {
+  display: flex;
+  position: absolute;
+  bottom: 46px;
+  left: 26px;
+}
+
+.action-summarize:hover {
+  color: #1d9bf0;
+  background: rgba(29, 155, 240, 0.12);
+}
+
+.action-summarize:focus {
+  outline: none;
+}
+
+.action-summarize:focus-visible {
+  outline: 2px solid #1d9bf0;
+  outline-offset: 2px;
+}
+
+.ai-summary {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(29, 155, 240, 0.06);
+  border-left: 3px solid #1d9bf0;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.ai-summary.hidden {
+  display: none;
+}
+
+.ai-summary-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #1d9bf0;
+  margin-bottom: 6px;
+}
+
+.ai-summary-text {
+  color: #e7e9ea;
+}
+
+.ai-summary-loading {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(29, 155, 240, 0.06);
+  border-left: 3px solid #2f3336;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #71767b;
+}
+
+.ai-summary-loading-dots {
+  display: inline-block;
+  animation: ai-summary-pulse 1s ease-in-out infinite;
+}
+
+@keyframes ai-summary-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+body.light-theme .ai-summary {
+  background: rgba(29, 155, 240, 0.08);
+  border-left-color: #1d9bf0;
+}
+
+body.light-theme .ai-summary-text {
+  color: #0f1419;
+}
+
+body.light-theme .ai-summary-loading {
+  background: rgba(0, 0, 0, 0.04);
+  border-left-color: #e5e7eb;
+  color: #6b7280;
+}
+

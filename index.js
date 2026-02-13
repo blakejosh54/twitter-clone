@@ -303,8 +303,161 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+/* ----- AI Summarize feature (frontend-only simulation) ----- */
 
+document.addEventListener("DOMContentLoaded", () => {
+  const SUMMARY_MIN_LENGTH = 120;
+  const SUMMARY_MAX_CHARS = 200;
+  const summaryCache = new Map();
 
+  const FILLER_WORDS = new Set([
+    "the", "a", "an", "very", "really", "just", "actually", "basically",
+    "literally", "so", "quite", "rather", "somewhat", "perhaps", "maybe",
+    "often", "sometimes", "only", "even", "also", "well", "now", "oh"
+  ]);
+
+  const STOP_WORDS = new Set([
+    ...FILLER_WORDS, "is", "are", "was", "were", "be", "been", "being",
+    "have", "has", "had", "do", "does", "did", "will", "would", "could",
+    "should", "may", "might", "must", "shall", "can", "to", "of", "in",
+    "for", "on", "with", "at", "by", "from", "as", "it", "its", "or", "and",
+    "but", "if", "then", "else", "when", "this", "that", "these", "those",
+    "i", "you", "he", "she", "we", "they", "what", "which", "who", "whom"
+  ]);
+
+  function normalizeWord(w) {
+    return w.toLowerCase().replace(/\W/g, "");
+  }
+
+  function generateSummary(text) {
+    const raw = text.trim();
+    if (raw.length <= SUMMARY_MAX_CHARS) return raw;
+
+    const sentences = raw.split(/(?<=[.!?])\s+/).filter((s) => s.trim().length > 0);
+    if (sentences.length === 0) sentences.push(raw);
+
+    function removeFiller(str) {
+      return str.split(/\s+/).filter((w) => !FILLER_WORDS.has(normalizeWord(w))).join(" ");
+    }
+
+    function scoreSentence(s) {
+      const cleaned = removeFiller(s);
+      const words = cleaned.split(/\s+/).filter((w) => w.length > 0);
+      const keywordScore = words.reduce(
+        (acc, w) => acc + (w.length > 4 ? 2 : w.length > 2 ? 1 : 0),
+        0
+      );
+      const len = words.length;
+      return len * 2 + keywordScore;
+    }
+
+    let best = null;
+    let bestScore = -1;
+    for (const s of sentences) {
+      const trimmed = s.trim();
+      if (trimmed.length < 15) continue;
+      const score = scoreSentence(trimmed);
+      if (score > bestScore) {
+        const candidate = trimmed.slice(0, SUMMARY_MAX_CHARS);
+        if (candidate.length >= 20) {
+          best = candidate;
+          bestScore = score;
+        }
+      }
+    }
+    if (best) return best;
+
+    const words = raw.split(/\s+/).filter((w) => !STOP_WORDS.has(normalizeWord(w)) && w.length > 0);
+    const take = Math.min(25, Math.max(20, Math.ceil(words.length / 3)));
+    const summary = words.slice(0, take).join(" ").trim();
+    return (summary.length > SUMMARY_MAX_CHARS ? summary.slice(0, SUMMARY_MAX_CHARS - 1) + "…" : summary) || raw.slice(0, SUMMARY_MAX_CHARS);
+  }
+
+  function createSummarizeButton() {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "action action-summarize";
+    btn.setAttribute("aria-label", "AI Summarize");
+    btn.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><g><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></g></svg>';
+    return btn;
+  }
+
+  function initSummarizeButtons() {
+    const feed = document.querySelector(".feed");
+    if (!feed) return;
+    feed.querySelectorAll(".post").forEach((post) => {
+      const textEl = post.querySelector(".post-text");
+      if (!textEl || textEl.textContent.trim().length <= SUMMARY_MIN_LENGTH) return;
+      post.classList.add("long-tweet");
+      if (post.querySelector(".action-summarize")) return;
+      const btn = createSummarizeButton();
+      post.appendChild(btn);
+    });
+  }
+
+  function handleSummarizeClick(btn) {
+    const post = btn.closest(".post");
+    const postMain = post.querySelector(".post-main");
+    const postActions = post.querySelector(".post-actions");
+    const textEl = post.querySelector(".post-text");
+    const id = post.id || "post-" + (post.getAttribute("data-post-id") || Math.random().toString(36).slice(2));
+    if (!postMain || !postActions || !textEl) return;
+
+    const cached = summaryCache.get(id);
+    if (cached) {
+      cached.element.classList.toggle("hidden");
+      return;
+    }
+
+    if (post.getAttribute("data-summarize-loading") === "true") return;
+
+    const loadingEl = document.createElement("div");
+    loadingEl.className = "ai-summary-loading";
+    loadingEl.setAttribute("aria-live", "polite");
+    loadingEl.innerHTML = 'Analyzing<span class="ai-summary-loading-dots">…</span>';
+    postMain.appendChild(loadingEl);
+    post.setAttribute("data-summarize-loading", "true");
+
+    const delay = 500 + Math.random() * 500;
+    setTimeout(() => {
+      const text = textEl.textContent.trim();
+      const summaryText = generateSummary(text);
+      loadingEl.remove();
+      post.removeAttribute("data-summarize-loading");
+
+      const box = document.createElement("div");
+      box.className = "ai-summary";
+      box.setAttribute("aria-label", "AI-generated summary");
+      box.innerHTML =
+        '<span class="ai-summary-label">AI Summary</span><span class="ai-summary-text"></span>';
+      box.querySelector(".ai-summary-text").textContent = summaryText;
+      postMain.appendChild(box);
+      summaryCache.set(id, { element: box, summaryText });
+    }, delay);
+  }
+
+  const feed = document.querySelector(".feed");
+  if (feed) {
+    feed.addEventListener("click", (e) => {
+      const btn = e.target.closest(".action-summarize");
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      handleSummarizeClick(btn);
+    });
+    feed.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      const btn = e.target.closest(".action-summarize");
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      handleSummarizeClick(btn);
+    });
+  }
+
+  initSummarizeButtons();
+});
 
 
 
