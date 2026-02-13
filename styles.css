@@ -246,7 +246,7 @@ a {
 }
 
 .account-name {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 15px;
 }
 
@@ -351,7 +351,6 @@ a {
   font-weight: 600;
   font-size: 14px;
 }
-
 
 .reply-pill:hover {
   background: rgba(29, 155, 240, 0.12);
@@ -613,7 +612,7 @@ a {
 .post-actions .action:hover,
 .post-tool.post-tool-grok:hover,
 .post-tool.post-tool-more:hover,
-.tweet-icons span:hover{
+.tweet-icons span:hover {
   color: #1d9bf0;
   background: rgba(29, 155, 240, 0.12);
 }
@@ -914,7 +913,7 @@ a {
 }
 
 .follow-name {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .follow-handle {
@@ -974,4 +973,177 @@ a {
 
 .fab-post {
   display: none;
+}
+
+/* manual theme change feature */
+
+.account {
+  position: relative;
+}
+
+.account-menu {
+  position: fixed;
+  background: #16181c;
+  border: 1px solid #2f3336;
+  border-radius: 16px;
+  padding: 8px 0;
+  width: 220px;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+
+  z-index: 9999;
+}
+
+.account-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.theme-toggle-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: #1d9bf0;
+  color: white;
+}
+
+.theme-toggle-btn:hover {
+  filter: brightness(0.9);
+}
+
+body.light-theme,
+body.light-theme .reply-visibility,
+body.light-theme .divider {
+  background: #ffffff;
+  color: #000000;
+  border-top: none;
+  border-bottom: none;
+}
+
+body.light-theme .thin {
+  border-top: #a1a1a1;
+  border-bottom: #a1a1a1;
+  background-color: #e2e2e2;
+}
+
+body.light-theme .tweet-actions {
+  border-bottom: 1px solid rgb(236, 236, 236);
+  border-top: 1px solid rgb(236, 236, 236);
+}
+
+body.light-theme .post-button {
+  background-color: #0f1419;
+  color: white;
+}
+
+body.light-theme .nav-item:hover,
+body.light-theme .top-tab:hover {
+  background-color: #e9e9e9;
+}
+
+body.light-theme .center {
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+}
+
+body.light-theme .post:hover,
+body.light-theme .trend:hover,
+body.light-theme .follow:hover,
+body.light-theme .news-item:hover {
+  background: #f3f4f6;
+}
+
+body.light-theme .card,
+body.light-theme .news,
+body.light-theme .poll {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+body.light-theme .topbar,
+body.light-theme .search-wrapper {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+body.light-theme .search,
+body.light-theme .search {
+  border: 1px solid #e5e7eb;
+}
+
+body.light-theme .poll-bar {
+  background-color: rgb(81, 196, 250);
+}
+
+body.light-theme .tweet-input,
+body.light-theme .search-input,
+body.light-theme .news-headline,
+body.light-theme .card-text,
+body.light-theme .top-tab,
+body.light-theme .post-text,
+body.light-theme .pct,
+body.light-theme .subscribe-btn {
+  color: #000000;
+}
+
+body.light-theme .topbar-logo svg {
+  fill: #000000;
+}
+
+body.light-theme .mobile-nav {
+  background-color: white;
+} 
+
+body.light-theme .mobile-nav svg {
+  fill: #000000;
+}
+
+
+body.light-theme .account-menu {
+  background: #0f1419;
+  color: white;
+  border: 1px solid #e5e7eb;
+}
+
+body.light-theme .post-author .handle,
+body.light-theme .post-author .time,
+body.light-theme .post-author .dot,
+body.light-theme .news-details-text,
+body.light-theme .trend-top,
+body.light-theme .trend-bottom {
+  color: #6b7280;
+}
+
+body.light-theme .badge-off {
+  color: black;
+  background: rgb(154, 255, 216);
+}
+
+.account {
+  position: relative;
+}
+
+.account-menu button {
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.account-menu button:hover {
+  background: rgba(255, 255, 255, 0.08);
 }

@@ -142,16 +142,13 @@
           </nav>
 
           <div class="account">
-            <img
-              src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"
-              class="avatar"
-              alt="default profile picture"
-            />
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg" class="avatar" id="accountAvatar" />
+
             <div class="account-details">
-              <div class="account-name">guest</div>
-              <div class="account-handle">@guestuser</div>
+              <div class="account-name">Your Name</div>
+              <div class="account-handle">@handle</div>
             </div>
-            <div class="account-more">⋯</div>
+
           </div>
         </div>
       </aside>
@@ -161,7 +158,7 @@
           <div class="topbar-inner">
            <img src="https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg" class="mobile-avatar" alt="default profile picture">
 
-            <div class="topbar-logo"><svg viewBox="0 0 24 24"><g><path d="M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456l-5.691 6.714-4.54-6.714H2.359l7.29 10.776L2.25 21.75h2.456l6.035-7.118 4.818 7.118h6.191-.008zM7.739 3.818L18.81 20.182h-2.447L5.29 3.818h2.447z"></path></g></svg></div>
+            <div class="topbar-logo"><svg viewBox="0 0 24 24"><path d="M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456l-5.691 6.714-4.54-6.714H2.359l7.29 10.776L2.25 21.75h2.456l6.035-7.118 4.818 7.118h6.191-.008zM7.739 3.818L18.81 20.182h-2.447L5.29 3.818h2.447z"></path></svg></div>
 
             <button class="subscribe-btn">Subscribe</button>
           </div>
@@ -253,7 +250,7 @@
 
         <div class="divider"></div>
 
-        <!-- feed section -->
+        <!-- center feed section -->
         <section class="feed">
           <article class="post">
             <img
@@ -961,6 +958,10 @@
           stroke-linecap="round"/>
       </svg>
     </button>
+
+    <div class="account-menu" id="accountMenu">
+      <button id="themeToggleBtn">Switch Theme</button>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>

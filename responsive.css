@@ -51,6 +51,9 @@
   .account {
     grid-template-columns: 44px;
     justify-content: center;
+    width: 60px;
+    padding: 8px;
+    border-radius: 990px;
   }
 
   .post-button::before {
@@ -147,6 +150,14 @@
 
   .tweet-block {
     padding: 12px 14px;
+  }
+
+  .account {
+    grid-template-columns: 44px;
+    width: 50px;
+    padding: 8px;
+    padding-right: 0px;
+    border-radius: 990px;
   }
 }
 
