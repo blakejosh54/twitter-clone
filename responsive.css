@@ -269,6 +269,7 @@
     height: auto;
     overflow: visible;
     padding-top: 102px;
+    border-left: none;
   }
 
   .topbar {
