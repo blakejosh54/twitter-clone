@@ -241,7 +241,7 @@ a {
   cursor: pointer;
 }
 
-.account-meta {
+.account-details {
   line-height: 1.1;
 }
 
@@ -550,7 +550,7 @@ a {
   grid-template-rows: 1fr 1fr;
 }
 
-.post-meta {
+.post-details {
   margin-top: 8px;
   color: #71767b;
   font-size: 13px;
@@ -955,4 +955,19 @@ a {
   background: #111;
   flex-shrink: 0;
   cursor: pointer;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.topbar-inner {
+  display: none;
+}
+
+.mobile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
 }
