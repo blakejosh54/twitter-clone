@@ -3,6 +3,9 @@
 A fully responsive Twitter/X-inspired UI built with HTML, CSS, and Vanilla JavaScript.
 
 This project recreates core Twitter functionality and includes AI-simulated features - all built without a backend.
+Be sure to click on your empty profile picture on the left side of the screen.
+Try and use the bookmark icon on the post cards and the bookmark nav item either below your screen on mobile or to the left on desktop
+Lastly check out the sparkle button towards the bottom left of the post cards for an "AI" summary of the post
 
 ---
 
@@ -48,3 +51,4 @@ This project recreates core Twitter functionality and includes AI-simulated feat
 No frameworks. No backend. No external libraries.
 
 ---
+
